@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  background-size: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.v-btn {
+  padding: 0;
+  text-decoration: none;
+  font: inherit;
+  color: inherit;
+}
+
+.text-h1,
+.text-h2,
+.text-h3,
+.text-h4,
+.text-h5,
+.text-subtitle-1,
+.text-subtitle-2,
+.text-body-1,
+.text-body-2 {
+  font-family: "Open Sans", sans-serif !important;
+}
+
+.width-app {
+  max-width: 780px;
+}
+
+.scroll-container::-webkit-scrollbar {
+  width: 8px;
+}
+.scroll-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: #DCEDC8;
+  border-radius: 20px;
+}
+
+.user-select-hidden {
+  user-select: none;
+}
+
+.v-container {
+  padding: 0;
+}
+
+/*# sourceMappingURL=styles.css.map */
