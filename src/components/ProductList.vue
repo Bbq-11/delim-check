@@ -71,6 +71,12 @@ const switchOpen = () => {
                 v-model:title="product.title"
                 v-model:price="product.price"
             />
+            <div
+                v-for="n in productStore.products"
+                :key="n.id"
+            >
+                {{ n }}
+            </div>
         </v-expansion-panels>
         <v-card-text
             v-else

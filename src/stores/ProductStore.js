@@ -9,7 +9,9 @@ export const useProductStore = defineStore('productStore', () => {
     const subtotal = computed(() => products.value.reduce((total, item) => total + +item?.price, 0));
     const totalCountProducts = computed(() => products.value.length);
     const checkDataTitles = computed(() => !products.value.find((item) => item?.title.length === 0));
-    const checkDataPrices = computed(() => !products.value.find((item) => item?.price.length === 0));
+    const checkDataPrices = computed(
+        () => !products.value.find((item) => item?.price.length === 0 || item?.price <= 0),
+    );
     const checkDataUsers = computed(() => !products.value.find((item) => item?.users.length === 0));
 
     const addUserProduct = computed(() => {
