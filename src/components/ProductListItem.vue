@@ -25,13 +25,6 @@ const props = defineProps({
     },
 });
 
-const rules = {
-    num: (value) => {
-        const pattern = /^([1-9][0-9]*(\.[0-9]+)?|0\.[0-9]+)$/;
-        return pattern.test(value);
-    },
-};
-
 const addAllUserProduct = (product) => {
     const countActiveUsers = product.users.length;
     const countAllUsers = userStore.totalCountUsers;
@@ -59,11 +52,8 @@ const addAllUserProduct = (product) => {
                         label="Цена"
                         type="number"
                         v-model.trim="price"
-                        :rules="[rules.num]"
+                        :rules="[productStore.checkDataPrices]"
                     />
-                </v-col>
-                <v-col>
-                    {{ props.product.price }}
                 </v-col>
             </v-row>
         </v-expansion-panel-title>

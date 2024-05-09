@@ -4,31 +4,16 @@ import { computed, ref } from 'vue';
 export const useProductStore = defineStore('productStore', () => {
     const products = ref([]);
 
-    const subtotal = computed(() => products.value.reduce((total, item) => total + +item?.price, 0));
+    const subtotal = computed(() => {
+        const result = products.value.reduce((total, item) => total + +item?.price, 0);
+        return (+result).toFixed(2);
+    });
     const totalCountProducts = computed(() => products.value.length);
     const checkDataTitles = computed(() => !products.value.find((item) => item?.title.length === 0));
     const checkDataPrices = computed(
-        () => !products.value.find((item) => item?.price.length === 0 || item?.price <= 0),
+        () => !products.value.find((item) => !/^([1-9][0-9]*(\.[0-9]{0,2})?|0\.[0-9]{0,2})$/.test(item?.price)),
     );
     const checkDataUsers = computed(() => !products.value.find((item) => item?.users.length === 0));
-
-    const addUserProduct = (productId, userId) => {
-        const product = products.value.find((item) => item?.id === productId);
-        const indexUser = product?.users.indexOf(userId);
-        if (indexUser === -1) product?.users.push(userId);
-        else product?.users.splice(indexUser, 1);
-    };
-    const clearUserProducts = (productId) => {
-        const product = products.value.find((item) => item?.id === productId);
-        product?.users.splice(0);
-    };
-
-    const checkUser = computed(() => {
-        return (productId, userId) => {
-            const product = products.value.find((item) => item?.id === productId);
-            return product?.users.includes(userId);
-        };
-    });
 
     const addProduct = (defaultUser) => {
         products.value.push({
@@ -48,20 +33,28 @@ export const useProductStore = defineStore('productStore', () => {
             users: [...product?.users],
         });
     };
+    const addUserProduct = (productId, userId) => {
+        const product = products.value.find((item) => item?.id === productId);
+        const indexUser = product?.users.indexOf(userId);
+        if (indexUser === -1) product?.users.push(userId);
+        else product?.users.splice(indexUser, 1);
+    };
+    const clearUserProducts = (productId) => {
+        const product = products.value.find((item) => item?.id === productId);
+        product?.users.splice(0);
+    };
 
     return {
         products,
-        useProductStore,
-        clearUserProducts,
         addProduct,
         removeProduct,
         copyProduct,
+        addUserProduct,
+        clearUserProducts,
         totalCountProducts,
         checkDataTitles,
         checkDataPrices,
         checkDataUsers,
         subtotal,
-        addUserProduct,
-        checkUser,
     };
 });

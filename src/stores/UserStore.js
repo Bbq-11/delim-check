@@ -22,15 +22,12 @@ export const useUserStore = defineStore('userStore', () => {
         });
     };
     const removeUser = (id) => (users.value = users.value.filter((item) => item?.id !== id));
-
     const fillTransactions = (product, user) => {
-        const amount = +(product.price / product.users.length).toFixed(2);
+        const amount = +(product.price / product.users.length).toFixed(3);
         if (user.transactions.has(product.payer.id))
             user.transactions.set(product.payer.id, user.transactions.get(product.payer.id) + amount);
         else user.transactions.set(product.payer.id, amount);
     };
-    //
-
     const fillDebtors = (creditor) => {
         users.value.forEach((user) => {
             if (user?.transactions.has(creditor.id)) {

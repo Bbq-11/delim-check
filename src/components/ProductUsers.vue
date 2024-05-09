@@ -19,13 +19,15 @@ const props = defineProps({
         username: String,
     },
 });
+
+const checkUser = (product, userId) => product.users.includes(userId);
 </script>
 
 <template>
     <v-col cols="auto">
         <v-card class="d-flex flex-column justify-center align-center border-sm rounded-lg pa-2 ma-0">
             <v-avatar
-                v-if="productStore.checkUser(props.product.id, props.user.id)"
+                v-if="checkUser(props.product, props.user.id)"
                 class="text-h5 text-uppercase text-primary bg-surface"
                 :icon="mdiCheck"
             />
