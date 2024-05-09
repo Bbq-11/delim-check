@@ -17,6 +17,7 @@ const userStore = useUserStore();
         v-if="userStore.totalCountUsers >= 2 && userStore.checkDataUsers"
         to="/pre-check"
         class="w-100"
+        tabindex="-1"
     >
         <v-btn-primary
             class="w-100 py-4"

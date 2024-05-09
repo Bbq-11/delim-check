@@ -1,5 +1,3 @@
-<script setup></script>
-
 <template>
     <v-container class="fill-height">
         <v-card
@@ -15,7 +13,10 @@
                 </v-card-subtitle>
             </v-card-item>
             <v-card-actions class="justify-center">
-                <router-link to="/usernames">
+                <router-link
+                    to="/usernames"
+                    tabindex="-1"
+                >
                     <v-btn-primary
                         class="py-4 px-6"
                         text="Начать"
@@ -25,3 +26,4 @@
         </v-card>
     </v-container>
 </template>
+<script setup lang="ts"></script>

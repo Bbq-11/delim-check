@@ -31,6 +31,7 @@ const productStore = useProductStore();
             "
             to="/result"
             class="w-100"
+            tabindex="-1"
         >
             <v-btn-primary
                 class="py-4 w-100"

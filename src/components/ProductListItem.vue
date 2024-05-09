@@ -27,7 +27,7 @@ const props = defineProps({
 
 const rules = {
     num: (value) => {
-        const pattern = /^[1-9]\d*$/;
+        const pattern = /^([1-9][0-9]*(\.[0-9]+)?|0\.[0-9]+)$/;
         return pattern.test(value);
     },
 };
@@ -53,6 +53,9 @@ const rules = {
                         v-model.trim="price"
                         :rules="[rules.num]"
                     />
+                </v-col>
+                <v-col>
+                    {{ productStore.getProductById(props.product.id).price }}
                 </v-col>
             </v-row>
         </v-expansion-panel-title>

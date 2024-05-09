@@ -12,7 +12,6 @@ export const useUserStore = defineStore('userStore', () => {
         users.value.forEach((item) => uniqueNames.add(item?.username));
         return uniqueNames.size === users.value.length;
     });
-    const getUserById = computed(() => (userId) => users.value.find((item) => item?.id === userId));
 
     const addUser = () => {
         users.value.push({
@@ -23,7 +22,10 @@ export const useUserStore = defineStore('userStore', () => {
             debtors: new Map(),
         });
     };
+    //filter?
     const removeUser = (id) => (users.value = users.value.filter((item) => item?.id !== id));
+    //
+    //ProductStore
     const fillTransactions = (user) => {
         const storeProduct = useProductStore();
         const activeProducts = storeProduct.products.filter(
@@ -36,24 +38,24 @@ export const useUserStore = defineStore('userStore', () => {
             else user.transactions.set(item.payer.id, amount);
         });
     };
+    //
+
     const fillDebtors = (creditor) => {
-        const userStore = useUserStore();
-        userStore.users.forEach((user) => {
-            if (user.transactions.has(creditor.id)) {
-                const deb = user.transactions.get(creditor.id);
-                if (creditor.transactions.has(user.id)) {
-                    const credit = creditor.transactions.get(user.id);
-                    if (credit > deb) creditor.debtors.set(user.username, credit - deb);
+        users.value.forEach((user) => {
+            if (user?.transactions.has(creditor.id)) {
+                const debit = user?.transactions.get(creditor.id);
+                if (creditor.transactions.has(user?.id)) {
+                    const credit = creditor.transactions.get(user?.id);
+                    if (credit > debit) creditor.debtors.set(user?.username, credit - debit);
                 } else {
-                    creditor.debtors.set(user.username, deb);
+                    creditor.debtors.set(user?.username, debit);
                 }
             }
         });
     };
     const fillCreditors = (debtor) => {
-        const userStore = useUserStore();
         debtor.transactions.forEach((value, key) => {
-            const creditor = userStore.getUserById(key);
+            const creditor = users.value.find((item) => item?.id === key);
             if (!creditor?.transactions.has(debtor.id)) debtor.creditors.set(creditor?.username, value);
             else {
                 const credit = creditor?.transactions.get(debtor.id);
@@ -73,7 +75,6 @@ export const useUserStore = defineStore('userStore', () => {
         users,
         totalCountUsers,
         checkDataUsers,
-        getUserById,
         addUser,
         removeUser,
         fillTransactions,

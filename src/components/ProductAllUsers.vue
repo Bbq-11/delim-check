@@ -33,5 +33,3 @@ const props = defineProps({
         </v-card>
     </v-col>
 </template>
-
-<style scoped></style>

@@ -90,5 +90,3 @@ const switchActive = () => (isActive.value = !isActive.value);
         </v-dialog>
     </template>
 </template>
-
-<style scoped></style>

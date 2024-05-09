@@ -27,7 +27,7 @@ const switchOpen = () => {
         variant="plain"
         text="Дальше!"
         :disabled="isOpen"
-        @click="switchOpen()"
+        @click="switchOpen"
     />
     <template>
         <v-dialog

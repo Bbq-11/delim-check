@@ -12,7 +12,7 @@ const userStore = useUserStore();
             class="py-2 px-5"
             :prepend-icon="mdiPlusCircleOutline"
             text="Добавить человека!"
-            @click="userStore.addUser()"
+            @click="userStore.addUser"
         />
     </div>
     <v-card
@@ -43,5 +43,3 @@ const userStore = useUserStore();
         </v-card-text>
     </v-card>
 </template>
-
-<style scoped></style>

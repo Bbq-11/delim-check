@@ -5,7 +5,6 @@ import { useUserStore } from './UserStore.js';
 export const useProductStore = defineStore('productStore', () => {
     const products = ref([]);
 
-    const getProductById = computed(() => (productId) => products.value.find((item) => item?.id === productId));
     const subtotal = computed(() => products.value.reduce((total, item) => total + +item?.price, 0));
     const totalCountProducts = computed(() => products.value.length);
     const checkDataTitles = computed(() => !products.value.find((item) => item?.title.length === 0));
@@ -16,8 +15,7 @@ export const useProductStore = defineStore('productStore', () => {
 
     const addUserProduct = computed(() => {
         return (productId, userId) => {
-            const productStore = useProductStore();
-            const product = productStore.getProductById(productId);
+            const product = products.value.find((item) => item?.id === productId);
             const indexUser = product?.users.indexOf(userId);
             if (indexUser === -1) product?.users.push(userId);
             else product?.users.splice(indexUser, 1);
@@ -25,9 +23,8 @@ export const useProductStore = defineStore('productStore', () => {
     });
     const addAllUserProduct = computed(() => {
         return (productId) => {
-            const productStore = useProductStore();
             const userStore = useUserStore();
-            const product = productStore.getProductById(productId);
+            const product = products.value.find((item) => item?.id === productId);
             const countActiveUsers = product?.users.length;
             const countAllUsers = userStore.totalCountUsers;
             product?.users.splice(0, product?.users.length);
@@ -36,9 +33,8 @@ export const useProductStore = defineStore('productStore', () => {
     });
     const checkCountUsers = computed(() => {
         return (productId) => {
-            const productStore = useProductStore();
-            const product = productStore.getProductById(productId);
-            const countActiveUsers = product.users.length;
+            const product = products.value.find((item) => item?.id === productId);
+            const countActiveUsers = product?.users.length;
             const userStore = useUserStore();
             const countAllUsers = userStore.totalCountUsers;
             return countActiveUsers === countAllUsers;
@@ -46,8 +42,7 @@ export const useProductStore = defineStore('productStore', () => {
     });
     const checkUser = computed(() => {
         return (productId, userId) => {
-            const productStore = useProductStore();
-            const product = productStore.getProductById(productId);
+            const product = products.value.find((item) => item?.id === productId);
             return product?.users.includes(userId);
         };
     });
@@ -63,9 +58,8 @@ export const useProductStore = defineStore('productStore', () => {
         });
     };
     const removeProduct = (id) => (products.value = products.value.filter((item) => item?.id !== id));
-    const copyProduct = (id) => {
-        const productStore = useProductStore();
-        const product = productStore.getProductById(id);
+    const copyProduct = (productId) => {
+        const product = products.value.find((item) => item?.id === productId);
         products.value.push({
             ...product,
             id: Date.now(),
@@ -79,7 +73,6 @@ export const useProductStore = defineStore('productStore', () => {
         addProduct,
         removeProduct,
         copyProduct,
-        getProductById,
         totalCountProducts,
         checkDataTitles,
         checkDataPrices,

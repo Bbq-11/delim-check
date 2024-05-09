@@ -26,7 +26,7 @@ const switchOpen = () => {
             class="py-2 px-5"
             :prepend-icon="mdiPlusCircleOutline"
             text="Добавить позицию!"
-            @click="productStore.addProduct()"
+            @click="productStore.addProduct"
         />
         <v-btn-primary
             v-else
@@ -35,7 +35,7 @@ const switchOpen = () => {
             text="Добавить позицию!"
             variant="plain"
             :disabled="isOpen"
-            @click="switchOpen()"
+            @click="switchOpen"
         />
         <template>
             <v-dialog
@@ -71,12 +71,6 @@ const switchOpen = () => {
                 v-model:title="product.title"
                 v-model:price="product.price"
             />
-            <div
-                v-for="n in productStore.products"
-                :key="n.id"
-            >
-                {{ n }}
-            </div>
         </v-expansion-panels>
         <v-card-text
             v-else
@@ -93,5 +87,3 @@ const switchOpen = () => {
         </v-card-text>
     </v-card>
 </template>
-
-<style scoped></style>

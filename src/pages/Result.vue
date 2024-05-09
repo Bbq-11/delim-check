@@ -53,11 +53,12 @@ onBeforeMount(() => {
     <router-link
         to="/"
         class="w-100"
+        tabindex="-1"
     >
         <v-btn-primary
             class="py-4 w-100 mb-10"
             elevation="10"
-            text="К результатам!"
+            text="На главную"
             @click="handleReset"
         />
     </router-link>

@@ -37,5 +37,3 @@ onMounted(() => {
         </div>
     </v-card>
 </template>
-
-<style scoped></style>
