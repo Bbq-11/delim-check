@@ -26,7 +26,7 @@ const switchOpen = () => {
             class="py-2 px-5"
             :prepend-icon="mdiPlusCircleOutline"
             text="Добавить позицию!"
-            @click="productStore.addProduct"
+            @click="productStore.addProduct(userStore.users[0])"
         />
         <v-btn-primary
             v-else

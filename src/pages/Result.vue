@@ -16,11 +16,18 @@ const handleReset = () => {
     userStore.users = [];
     productStore.products = [];
 };
-
+const setTransactions = (user) => {
+    const activeProducts = productStore.products.filter(
+        (item) => item.users.find((item) => item === user.id) && item.payer.id !== user.id,
+    );
+    activeProducts.forEach((item) => {
+        userStore.fillTransactions(item, user);
+    });
+};
 onBeforeMount(() => {
     userStore.clearTransactions();
     for (const user of userStore.users) {
-        userStore.fillTransactions(user);
+        setTransactions(user);
     }
 });
 </script>

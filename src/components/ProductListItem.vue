@@ -31,6 +31,14 @@ const rules = {
         return pattern.test(value);
     },
 };
+
+const addAllUserProduct = (product) => {
+    const countActiveUsers = product.users.length;
+    const countAllUsers = userStore.totalCountUsers;
+    productStore.clearUserProducts(product.id);
+    if (countActiveUsers !== countAllUsers)
+        userStore.users.forEach((user) => productStore.addUserProduct(product.id, user.id));
+};
 </script>
 
 <template>
@@ -55,7 +63,7 @@ const rules = {
                     />
                 </v-col>
                 <v-col>
-                    {{ productStore.getProductById(props.product.id).price }}
+                    {{ props.product.price }}
                 </v-col>
             </v-row>
         </v-expansion-panel-title>
@@ -94,7 +102,7 @@ const rules = {
             >
                 <ProductAllUsers
                     :product="props.product"
-                    @click="productStore.addAllUserProduct(props.product.id)"
+                    @click="addAllUserProduct(props.product)"
                 />
                 <ProductUsers
                     v-for="user in userStore.users"

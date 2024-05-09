@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
-import { useUserStore } from './UserStore.js';
 
 export const useProductStore = defineStore('productStore', () => {
     const products = ref([]);
@@ -13,33 +12,17 @@ export const useProductStore = defineStore('productStore', () => {
     );
     const checkDataUsers = computed(() => !products.value.find((item) => item?.users.length === 0));
 
-    const addUserProduct = computed(() => {
-        return (productId, userId) => {
-            const product = products.value.find((item) => item?.id === productId);
-            const indexUser = product?.users.indexOf(userId);
-            if (indexUser === -1) product?.users.push(userId);
-            else product?.users.splice(indexUser, 1);
-        };
-    });
-    const addAllUserProduct = computed(() => {
-        return (productId) => {
-            const userStore = useUserStore();
-            const product = products.value.find((item) => item?.id === productId);
-            const countActiveUsers = product?.users.length;
-            const countAllUsers = userStore.totalCountUsers;
-            product?.users.splice(0, product?.users.length);
-            if (countActiveUsers !== countAllUsers) userStore.users.forEach((user) => product?.users.push(user.id));
-        };
-    });
-    const checkCountUsers = computed(() => {
-        return (productId) => {
-            const product = products.value.find((item) => item?.id === productId);
-            const countActiveUsers = product?.users.length;
-            const userStore = useUserStore();
-            const countAllUsers = userStore.totalCountUsers;
-            return countActiveUsers === countAllUsers;
-        };
-    });
+    const addUserProduct = (productId, userId) => {
+        const product = products.value.find((item) => item?.id === productId);
+        const indexUser = product?.users.indexOf(userId);
+        if (indexUser === -1) product?.users.push(userId);
+        else product?.users.splice(indexUser, 1);
+    };
+    const clearUserProducts = (productId) => {
+        const product = products.value.find((item) => item?.id === productId);
+        product?.users.splice(0);
+    };
+
     const checkUser = computed(() => {
         return (productId, userId) => {
             const product = products.value.find((item) => item?.id === productId);
@@ -47,13 +30,12 @@ export const useProductStore = defineStore('productStore', () => {
         };
     });
 
-    const addProduct = () => {
-        const userStore = useUserStore();
+    const addProduct = (defaultUser) => {
         products.value.push({
             id: Date.now(),
             title: '',
             price: '',
-            payer: userStore.users[0],
+            payer: defaultUser,
             users: [],
         });
     };
@@ -70,6 +52,7 @@ export const useProductStore = defineStore('productStore', () => {
     return {
         products,
         useProductStore,
+        clearUserProducts,
         addProduct,
         removeProduct,
         copyProduct,
@@ -79,8 +62,6 @@ export const useProductStore = defineStore('productStore', () => {
         checkDataUsers,
         subtotal,
         addUserProduct,
-        addAllUserProduct,
-        checkCountUsers,
         checkUser,
     };
 });

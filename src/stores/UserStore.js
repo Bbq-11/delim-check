@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
-import { useProductStore } from './ProductStore.js';
 
 export const useUserStore = defineStore('userStore', () => {
     const users = ref([]);
@@ -22,21 +21,13 @@ export const useUserStore = defineStore('userStore', () => {
             debtors: new Map(),
         });
     };
-    //filter?
     const removeUser = (id) => (users.value = users.value.filter((item) => item?.id !== id));
-    //
-    //ProductStore
-    const fillTransactions = (user) => {
-        const storeProduct = useProductStore();
-        const activeProducts = storeProduct.products.filter(
-            (item) => item.users.find((item) => item === user.id) && item.payer.id !== user.id,
-        );
-        activeProducts.forEach((item) => {
-            const amount = +(item.price / item.users.length).toFixed(2);
-            if (user.transactions.has(item.payer.id))
-                user.transactions.set(item.payer.id, user.transactions.get(item.payer.id) + amount);
-            else user.transactions.set(item.payer.id, amount);
-        });
+
+    const fillTransactions = (product, user) => {
+        const amount = +(product.price / product.users.length).toFixed(2);
+        if (user.transactions.has(product.payer.id))
+            user.transactions.set(product.payer.id, user.transactions.get(product.payer.id) + amount);
+        else user.transactions.set(product.payer.id, amount);
     };
     //
 
