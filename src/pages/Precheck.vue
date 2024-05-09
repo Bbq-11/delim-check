@@ -18,7 +18,7 @@ const productStore = useProductStore();
     >
         <v-card-title class="tex-h5 mb-2"> Промежуточный итог: </v-card-title>
         <v-card-text class="text-h4 mb-1">
-            {{ productStore.subtotal }}
+            {{ productStore.subtotal() }}
         </v-card-text>
     </v-card>
     <div class="mb-10">

@@ -5,8 +5,8 @@ export const useProductStore = defineStore('productStore', () => {
     const products = ref([]);
 
     const subtotal = computed(() => {
-        const result = products.value.reduce((total, item) => total + +item?.price, 0);
-        return (+result).toFixed(2);
+        const result = +products.value.reduce((total, item) => total + +item?.price, 0);
+        return +result.toFixed(2);
     });
     const totalCountProducts = computed(() => products.value.length);
     const checkDataTitles = computed(() => !products.value.find((item) => item?.title.length === 0));
@@ -39,7 +39,7 @@ export const useProductStore = defineStore('productStore', () => {
         if (indexUser === -1) product?.users.push(userId);
         else product?.users.splice(indexUser, 1);
     };
-    const clearUserProducts = (productId) => {
+    const clearUsersProduct = (productId) => {
         const product = products.value.find((item) => item?.id === productId);
         product?.users.splice(0);
     };
@@ -50,7 +50,7 @@ export const useProductStore = defineStore('productStore', () => {
         removeProduct,
         copyProduct,
         addUserProduct,
-        clearUserProducts,
+        clearUsersProduct,
         totalCountProducts,
         checkDataTitles,
         checkDataPrices,

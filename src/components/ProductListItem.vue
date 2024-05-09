@@ -25,11 +25,10 @@ const props = defineProps({
     },
 });
 
-const addAllUserProduct = (product) => {
+const addAllUsersProduct = (product) => {
     const countActiveUsers = product.users.length;
-    const countAllUsers = userStore.totalCountUsers;
-    productStore.clearUserProducts(product.id);
-    if (countActiveUsers !== countAllUsers)
+    productStore.clearUsersProduct(product.id);
+    if (countActiveUsers !== userStore.totalCountUsers)
         userStore.users.forEach((user) => productStore.addUserProduct(product.id, user.id));
 };
 </script>
@@ -92,7 +91,7 @@ const addAllUserProduct = (product) => {
             >
                 <ProductAllUsers
                     :product="props.product"
-                    @click="addAllUserProduct(props.product)"
+                    @click="addAllUsersProduct(props.product)"
                 />
                 <ProductUsers
                     v-for="user in userStore.users"

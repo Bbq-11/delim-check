@@ -23,7 +23,7 @@ export const useUserStore = defineStore('userStore', () => {
     };
     const removeUser = (id) => (users.value = users.value.filter((item) => item?.id !== id));
     const fillTransactions = (product, user) => {
-        const amount = +(product.price / product.users.length).toFixed(3);
+        const amount = +(product.price / product.users.length).toFixed(4);
         if (user.transactions.has(product.payer.id))
             user.transactions.set(product.payer.id, user.transactions.get(product.payer.id) + amount);
         else user.transactions.set(product.payer.id, amount);
@@ -61,13 +61,13 @@ export const useUserStore = defineStore('userStore', () => {
 
     return {
         users,
-        totalCountUsers,
-        checkDataUsers,
         addUser,
         removeUser,
         fillTransactions,
         fillDebtors,
         fillCreditors,
         clearTransactions,
+        totalCountUsers,
+        checkDataUsers,
     };
 });
