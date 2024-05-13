@@ -43,7 +43,7 @@ const addAllUsersProduct = (product) => {
                 <v-col>
                     <v-text-field
                         label="Название"
-                        v-model.trim="title"
+                        v-model="title"
                     />
                 </v-col>
                 <v-col>

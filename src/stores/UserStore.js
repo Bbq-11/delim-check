@@ -24,6 +24,7 @@ export const useUserStore = defineStore('userStore', () => {
     const removeUser = (id) => (users.value = users.value.filter((item) => item?.id !== id));
     const fillTransactions = (product, user) => {
         const amount = +(product.price / product.users.length).toFixed(4);
+        console.log(amount);
         if (user.transactions.has(product.payer.id))
             user.transactions.set(product.payer.id, user.transactions.get(product.payer.id) + amount);
         else user.transactions.set(product.payer.id, amount);
@@ -31,10 +32,10 @@ export const useUserStore = defineStore('userStore', () => {
     const fillDebtors = (creditor) => {
         users.value.forEach((user) => {
             if (user?.transactions.has(creditor.id)) {
-                const debit = user?.transactions.get(creditor.id);
+                const debit = user?.transactions.get(creditor.id).toFixed(2);
                 if (creditor.transactions.has(user?.id)) {
-                    const credit = creditor.transactions.get(user?.id);
-                    if (credit > debit) creditor.debtors.set(user?.username, credit - debit);
+                    const credit = creditor.transactions.get(user?.id).toFixed(2);
+                    if (credit > debit) creditor.debtors.set(user?.username, (credit - debit).toFixed(2));
                 } else {
                     creditor.debtors.set(user?.username, debit);
                 }
@@ -44,10 +45,10 @@ export const useUserStore = defineStore('userStore', () => {
     const fillCreditors = (debtor) => {
         debtor.transactions.forEach((value, key) => {
             const creditor = users.value.find((item) => item?.id === key);
-            if (!creditor?.transactions.has(debtor.id)) debtor.creditors.set(creditor?.username, value);
+            if (!creditor?.transactions.has(debtor.id)) debtor.creditors.set(creditor?.username, value.toFixed(2));
             else {
-                const credit = creditor?.transactions.get(debtor.id);
-                if (value > credit) debtor.creditors.set(creditor?.username, value - credit);
+                const credit = creditor?.transactions.get(debtor.id).toFixed(2);
+                if (value > credit) debtor.creditors.set(creditor?.username, (value.toFixed(2) - credit).toFixed(2));
             }
         });
     };
