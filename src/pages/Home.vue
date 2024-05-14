@@ -26,4 +26,3 @@
         </v-card>
     </v-container>
 </template>
-<script setup lang="ts"></script>

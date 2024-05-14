@@ -1,5 +1,4 @@
 <script setup>
-// import { computed, ref } from 'vue';
 import { mdiContentCopy, mdiDeleteOutline } from '@mdi/js';
 
 import { useProductStore } from '../stores/ProductStore.js';

@@ -1,8 +1,5 @@
 <script setup>
 import { mdiCheck } from '@mdi/js';
-import { useProductStore } from '../stores/ProductStore.js';
-
-const productStore = useProductStore();
 
 const props = defineProps({
     product: {
