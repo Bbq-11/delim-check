@@ -31,8 +31,6 @@ export default createVuetify({
                     surfaceVariant: colors.lightGreen.lighten3,
                     primary: '#263b26',
                     secondary: '#1a281a',
-                    // accent
-                    //
                     error: colors.orange.lighten2,
                 },
             },
@@ -41,7 +39,6 @@ export default createVuetify({
                 colors: {
                     background: '#131e13',
                     surface: '#1c2d1c',
-                    // surface: '#203120',
                     primary: colors.lightGreen.lighten4,
                     secondary: colors.lightGreen.lighten5,
                     'surface-variant': colors.lightGreen.lighten1,

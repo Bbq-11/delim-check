@@ -5,6 +5,7 @@ import DialogError from '../components/DialogError.vue';
 
 const productStore = useProductStore();
 </script>
+
 <template>
     <v-sheet
         class="rounded-lg mt-12 mb-4"
