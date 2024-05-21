@@ -9,6 +9,7 @@ actualTheme.value = localStorage.getItem('theme') || 'light';
 
 function toggleTheme() {
     actualTheme.value = actualTheme.value === 'light' ? 'dark' : 'light';
+    theme.global.name.value = actualTheme.value;
     localStorage.theme = actualTheme.value;
 }
 </script>
