@@ -32,7 +32,7 @@ const checkUser = (product, userId) => product.users.includes(userId);
                 v-else
                 class="text-h5 text-uppercase font-weight-bold text-primary bg-background"
             >
-                {{ props.user?.username.charAt(0).toUpperCase() }}
+                {{ props.user?.username.charAt(0) }}
             </v-avatar>
             <v-card-text class="pa-0 mt-2">
                 {{ props.user.username }}

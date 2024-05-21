@@ -24,7 +24,6 @@ export const useUserStore = defineStore('userStore', () => {
     const removeUser = (id) => (users.value = users.value.filter((item) => item?.id !== id));
     const fillTransactions = (product, user) => {
         const amount = +(product.price / product.users.length).toFixed(4);
-        console.log(amount);
         if (user.transactions.has(product.payer.id))
             user.transactions.set(product.payer.id, user.transactions.get(product.payer.id) + amount);
         else user.transactions.set(product.payer.id, amount);

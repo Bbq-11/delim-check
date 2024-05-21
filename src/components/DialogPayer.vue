@@ -64,7 +64,7 @@ const switchActive = () => (isActive.value = !isActive.value);
                                         <v-avatar
                                             class="text-h5 text-uppercase font-weight-bold text-primary bg-background mr-3"
                                         >
-                                            {{ user.username.charAt(0).toUpperCase() }}
+                                            {{ user.username.charAt(0) }}
                                         </v-avatar>
                                     </v-col>
                                     <v-col

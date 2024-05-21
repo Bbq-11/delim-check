@@ -17,7 +17,7 @@ const props = defineProps({
         <v-row class="align-center">
             <v-col cols="auto">
                 <v-avatar class="text-h5 text-uppercase font-weight-bold text-primary bg-background">
-                    {{ modelValue.charAt(0).toUpperCase() }}
+                    {{ modelValue.charAt(0) }}
                 </v-avatar>
             </v-col>
             <v-col>
