@@ -1,13 +1,15 @@
 <script setup>
 import { mdiWeatherSunsetDown, mdiWeatherSunsetUp } from '@mdi/js';
-import { ref } from 'vue';
 import { useTheme } from 'vuetify';
+import { ref } from 'vue';
 
 const theme = useTheme();
-const dark = ref(false);
+const actualTheme = ref('');
+actualTheme.value = localStorage.getItem('theme') || 'light';
+
 function toggleTheme() {
-    dark.value = !dark.value;
-    theme.global.name.value = dark.value ? 'dark' : 'light';
+    actualTheme.value = actualTheme.value === 'light' ? 'dark' : 'light';
+    localStorage.theme = actualTheme.value;
 }
 </script>
 
@@ -21,7 +23,7 @@ function toggleTheme() {
                     @click="toggleTheme"
                 >
                     <v-icon
-                        v-if="dark"
+                        v-if="actualTheme === 'dark'"
                         size="40"
                         :icon="mdiWeatherSunsetUp"
                     />

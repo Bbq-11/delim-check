@@ -21,7 +21,7 @@ export default createVuetify({
         },
     },
     theme: {
-        defaultTheme: 'light',
+        defaultTheme: localStorage.getItem('theme') || 'light',
         themes: {
             light: {
                 dark: false,
