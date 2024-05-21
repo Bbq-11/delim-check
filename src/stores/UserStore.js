@@ -1,8 +1,18 @@
 import { defineStore } from 'pinia';
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 
 export const useUserStore = defineStore('userStore', () => {
     const users = ref([]);
+
+    const usersInLocalStorage = localStorage.getItem('users');
+    if (usersInLocalStorage) {
+        users.value = JSON.parse(usersInLocalStorage)._value;
+        users.value.forEach((user) => {
+            user.transactions = new Map(Object.entries(user.transactions));
+            user.creditors = new Map(Object.entries(user.creditors));
+            user.debtors = new Map(Object.entries(user.debtors));
+        });
+    }
 
     const totalCountUsers = computed(() => users.value.length);
     const checkDataUsers = computed(() => {
@@ -58,6 +68,12 @@ export const useUserStore = defineStore('userStore', () => {
             item?.debtors.clear();
         });
     };
+
+    watch(
+        () => users,
+        (state) => localStorage.setItem('users', JSON.stringify(state)),
+        { deep: true },
+    );
 
     return {
         users,

@@ -1,8 +1,11 @@
 import { defineStore } from 'pinia';
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 
 export const useProductStore = defineStore('productStore', () => {
     const products = ref([]);
+
+    const productsInLocalStorage = localStorage.getItem('products');
+    if (productsInLocalStorage) products.value = JSON.parse(productsInLocalStorage)._value;
 
     const subtotal = computed(() => {
         const result = +products.value.reduce((total, item) => total + +item?.price, 0);
@@ -43,6 +46,12 @@ export const useProductStore = defineStore('productStore', () => {
         const product = products.value.find((item) => item?.id === productId);
         product?.users.splice(0);
     };
+
+    watch(
+        () => products,
+        (state) => localStorage.setItem('products', JSON.stringify(state)),
+        { deep: true },
+    );
 
     return {
         products,

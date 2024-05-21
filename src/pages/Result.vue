@@ -13,6 +13,7 @@ const router = useRouter();
 const tab = ref('byDebtor');
 const handleReset = () => {
     router.push('/');
+    localStorage.clear();
     userStore.users = [];
     productStore.products = [];
 };
@@ -25,7 +26,7 @@ const setTransactions = (user) => {
     });
 };
 onBeforeMount(() => {
-    userStore.clearTransactions();
+    // userStore.clearTransactions();
     for (const user of userStore.users) {
         setTransactions(user);
     }
