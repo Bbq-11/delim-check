@@ -43,6 +43,7 @@ const addAllUsersProduct = (product) => {
                     <v-text-field
                         label="Название"
                         v-model="title"
+                        autocomplete="off"
                     />
                 </v-col>
                 <v-col>
@@ -51,6 +52,7 @@ const addAllUsersProduct = (product) => {
                         type="number"
                         v-model.trim="price"
                         :rules="[productStore.checkDataPrices]"
+                        autocomplete="off"
                     />
                 </v-col>
             </v-row>

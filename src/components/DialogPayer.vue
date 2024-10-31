@@ -1,5 +1,5 @@
 <script setup>
-import { mdiMapMarkerQuestionOutline, mdiWalletOutline } from '@mdi/js';
+import { mdiMapMarkerAccountOutline, mdiWalletOutline } from '@mdi/js';
 import { ref } from 'vue';
 
 import { useProductStore } from '../stores/ProductStore.js';
@@ -42,7 +42,7 @@ const switchActive = () => (isActive.value = !isActive.value);
                     <v-icon
                         size="100"
                         color="primary"
-                        :icon="mdiMapMarkerQuestionOutline"
+                        :icon="mdiMapMarkerAccountOutline"
                     />
                 </div>
                 <v-card-text class="text-h5 mb-2">

@@ -1,5 +1,4 @@
 <script setup>
-import { mdiClose } from '@mdi/js';
 import { useUserStore } from '../stores/UserStore.js';
 
 const userStore = useUserStore();
@@ -21,16 +20,12 @@ const props = defineProps({
                 </v-avatar>
             </v-col>
             <v-col>
-                <v-text-field v-model="modelValue" />
-            </v-col>
-            <v-col cols="auto">
-                <v-btn
-                    :icon="mdiClose"
-                    color="error"
-                    variant="tonal"
-                    @click="userStore.removeUser(props.user)"
+                <v-text-field
+                    v-model="modelValue"
+                    autocomplete="off"
                 />
             </v-col>
+            <v-col cols="auto"> </v-col>
         </v-row>
     </v-container>
 </template>
